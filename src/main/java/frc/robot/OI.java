@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -62,7 +63,13 @@ public class OI {
 	 */
 	public void initializeButtons() {
 		leftButtons = new Button[7];
-		rightButtons = new Button[7];
+		rightButtons = new Button[12];
+		for(int i = 0; i < leftButtons.length; i++)
+			leftButtons[i] = new JoystickButton(leftJoystick, i + 1);
+		for(int i = 0; i < rightButtons.length; i++)
+			rightButtons[i] = new JoystickButton(rightJoystick, i + 1);
+
+		leftButtons[1].whenPressed(new ToggleLimelightCameraMode());
 	}
 	
 	public double getLeftY(){

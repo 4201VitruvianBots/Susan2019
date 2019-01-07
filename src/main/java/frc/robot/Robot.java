@@ -7,7 +7,7 @@
 
 package frc.robot;
 
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -17,7 +17,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends TimedRobot {
 	public static DriveTrain driveTrain = new DriveTrain();
-	public static OI oi = new OI();
+	public static Limelight limelight = new Limelight();
+	public static OI oi;
 
 	Command m_teleOpCommand;
 	Command m_autonomousCommand;
