@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.vitruvianlib.driverstation.Shuffleboard;
 
 public class Robot extends TimedRobot {
 	public static DriveTrain driveTrain = new DriveTrain();
@@ -26,10 +27,17 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+
+		Shuffleboard.putNumber("LimelightPID", "kP", 0.3);
+		Shuffleboard.putNumber("LimelightPID", "kI", 0);
+		Shuffleboard.putNumber("LimelightPID", "kD", 0.01);
+		Shuffleboard.putNumber("LimelightPID", "output", 0.6);
+
 	}
 
 	@Override
 	public void robotPeriodic() {
+		driveTrain.updateSmartDashboard();
 	}
 
 	@Override

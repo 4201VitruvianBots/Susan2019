@@ -25,7 +25,7 @@ public class Limelight extends Subsystem {
     }
 
     public boolean isValidTarget(){
-        return limelightTable.getEntry("tv").getBoolean(false);
+        return (limelightTable.getEntry("tv").getDouble(0) == 1) ? true : false;
     }
 
     public void initDefaultCommand() { }

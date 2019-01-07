@@ -3,17 +3,18 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.vitruvianlib.driverstation.Shuffleboard;
 import frc.vitruvianlib.util.PIDOutputInterface;
 
 public class AlignToTarget extends Command {
     PIDController driveGyroPIDController;
     PIDOutputInterface driveTurnPIDOutput;
-    static double kP = 0.08;        		// Start with P = 10% of your max output, double until you get a quarter-decay oscillation
+    static double kP = 0.3;        		// Start with P = 10% of your max output, double until you get a quarter-decay oscillation
     static double kI = 0;           // Start with I = P / 100
-    static double kD = 0.6;           	// Start with D = P * 10
+    static double kD = 0.01;           	// Start with D = P * 10
     static double period = 0.01;
-
-    double setpoint = 0;
+    static double outputMagnitude = 0;
+    double setpoint = 0.6;
 
     public AlignToTarget() {
         // Use requires() here to declare subsystem dependencies
@@ -24,11 +25,18 @@ public class AlignToTarget extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        Robot.driveTrain.resetAngle();
+        kP = Shuffleboard.getNumber("LimelightPID", "kP", kP);
+        kI = Shuffleboard.getNumber("LimelightPID", "kI", kI);
+        kD = Shuffleboard.getNumber("LimelightPID", "kD", kD);
+        outputMagnitude = Shuffleboard.getNumber("LimelightPID", "output", outputMagnitude);
+
+        driveTurnPIDOutput = new PIDOutputInterface();
         driveGyroPIDController = new PIDController(kP, kI, kD, Robot.driveTrain.navX, driveTurnPIDOutput, period);
         driveGyroPIDController.setName("Drive Gyro PID");
         driveGyroPIDController.setSubsystem("Drive Train");
         driveGyroPIDController.setAbsoluteTolerance(1.5);
-        driveGyroPIDController.setOutputRange(-0.8, 0.8);
+        driveGyroPIDController.setOutputRange(-outputMagnitude, outputMagnitude);
         driveGyroPIDController.enable();
 
     }

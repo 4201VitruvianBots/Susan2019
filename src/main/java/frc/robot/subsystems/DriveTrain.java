@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.SetArcadeDrive;
+import frc.vitruvianlib.driverstation.Shuffleboard;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
@@ -41,6 +42,14 @@ public class DriveTrain extends Subsystem {
 	public double getAngle(){
 		// Angle is negated due to that navX being upside-down on Susan
 		return -navX.getAngle();
+	}
+
+	public void resetAngle(){
+		navX.reset();
+	}
+	
+	public void updateSmartDashboard() {
+		Shuffleboard.putNumber("LimelightPID", "Angle", getAngle());
 	}
 
 	public void initDefaultCommand() {
