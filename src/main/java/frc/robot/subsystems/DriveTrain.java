@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
@@ -19,6 +21,7 @@ public class DriveTrain extends Subsystem {
 
 	DifferentialDrive robotDrive = new DifferentialDrive(m_leftMaster, m_rightMaster);
 
+	public AHRS navX = new AHRS(SPI.Port.kMXP);
 	public DriveTrain(){
 		super("Drive Train");
 
@@ -33,6 +36,11 @@ public class DriveTrain extends Subsystem {
 
 	public void driveArcade(double forward, double turn) {
 		robotDrive.arcadeDrive(forward, turn);
+	}
+
+	public double getAngle(){
+		// Angle is negated due to that navX being upside-down on Susan
+		return -navX.getAngle();
 	}
 
 	public void initDefaultCommand() {

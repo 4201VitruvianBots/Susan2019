@@ -13,11 +13,19 @@ public class Limelight extends Subsystem {
     }
 
     public int getCameraMode() {
-        return limelightTable.getEntry("camMode").getNumber( 0).intValue();
+        return (int) limelightTable.getEntry("camMode").getDouble(0);
     }
 
     public void setCameraMode(int camMode) {
         limelightTable.getEntry("camMode").setNumber(camMode);
+    }
+
+    public double getTargetX(){
+        return  limelightTable.getEntry("tx").getDouble(0);
+    }
+
+    public boolean isValidTarget(){
+        return limelightTable.getEntry("tv").getBoolean(false);
     }
 
     public void initDefaultCommand() { }
