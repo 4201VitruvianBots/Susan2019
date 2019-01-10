@@ -19,6 +19,7 @@ import frc.vitruvianlib.driverstation.Shuffleboard;
 public class Robot extends TimedRobot {
 	public static DriveTrain driveTrain = new DriveTrain();
 	public static Limelight limelight = new Limelight();
+	public static Pneumatics pneumatics = new Pneumatics();
 	public static OI oi;
 
 	Command m_teleOpCommand;
