@@ -17,6 +17,7 @@ public class AlignToTargetDavid extends Command {
     private double kV = 0.1; //Voltage to hold constant velocity
     private double kA = 0.1; //Voltage to hold constant acceleration
     static double period = 0.02;
+
     //static double outputMagnitude = 0;
     double setpoint = 0.6;
     double PIDOutput = 0;
@@ -53,8 +54,19 @@ public class AlignToTargetDavid extends Command {
         maxAcceleration = Shuffleboard.getNumber("DriveTrainConstants", "maxAcceleration", maxAcceleration);
         //outputMagnitude = Shuffleboard.getNumber("LimelightPID", "output", outputMagnitude);
         setpoint = Robot.limelight.getTargetX();
-
         PIDTimer = new Timer();
+
+
+
+
+        /*driveTurnPIDOutput = new PIDOutputInterface();
+        driveGyroPIDController = new PIDController(kP, kI, kD, Robot.driveTrain.navX, driveTurnPIDOutput, period);
+        driveGyroPIDController.setName("Drive Gyro PID");
+        driveGyroPIDController.setSubsystem("Drive Train");
+        driveGyroPIDController.setAbsoluteTolerance(1.5);
+        driveGyroPIDController.setOutputRange(-outputMagnitude, outputMagnitude);
+        driveGyroPIDController.enable();*/
+
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -76,9 +88,6 @@ public class AlignToTargetDavid extends Command {
 
 
             //Feed forward loop
-            FFVoltage = 0;
-            FFError = setpoint-Robot.driveTrain.getAngle();
-            FFTurnSpeed = (setpoint-PIDPreviousError)/(PIDPreviousTime-PIDTimer.getFPGATimestamp());
             if (FFTurnSpeed <= maxTurnSpeed && FFError >= FFTurnSpeed*FFTurnSpeed/(2*(maxAcceleration))) {
                 FFVoltage = kS + kV * FFTurnSpeed + kA * maxAcceleration;
             } else if (FFError >= FFTurnSpeed*FFTurnSpeed/(2*(maxAcceleration))){
