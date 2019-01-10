@@ -50,7 +50,9 @@ public class RobotMap {
 	// Pneumatic Modules & their devices
 	public static final int PCMOne = 11;
 	public static final int driveTrainShifterForward = 0;
-	public static final int driveTrainShifterReverse = 1;
+	public static final int driveTrainShifterReverse = 1;;
+	public static final int testPistonForward = 2;
+	public static final int testPistonReverse = 3;
 
 	// Motor Controllers
 	public static final int driveTrainLeftMaster = 20;

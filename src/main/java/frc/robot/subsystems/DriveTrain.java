@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.SetArcadeDrive;
+import frc.robot.commands.SetTankDrive;
 import frc.vitruvianlib.driverstation.Shuffleboard;
 
 /**
@@ -53,6 +54,6 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new SetArcadeDrive());
+		setDefaultCommand(new SetTankDrive());
 	}
 }

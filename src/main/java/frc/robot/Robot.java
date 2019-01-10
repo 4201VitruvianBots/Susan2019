@@ -18,6 +18,7 @@ import frc.vitruvianlib.driverstation.Shuffleboard;
 
 public class Robot extends TimedRobot {
 	public static DriveTrain driveTrain = new DriveTrain();
+	public static TestPiston testPiston = new TestPiston();
 	public static Limelight limelight = new Limelight();
 	public static OI oi;
 
@@ -28,16 +29,21 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		oi = new OI();
 
-		Shuffleboard.putNumber("LimelightPID", "kP", 0.3);
+		Shuffleboard.putNumber("LimelightPID", "kP", AlignToTargetDavid.kP);
 		Shuffleboard.putNumber("LimelightPID", "kI", 0);
-		Shuffleboard.putNumber("LimelightPID", "kD", 0.01);
+		Shuffleboard.putNumber("LimelightPID", "kD", AlignToTargetDavid.kD);
 		Shuffleboard.putNumber("LimelightPID", "output", 0.6);
+		Shuffleboard.putNumber("DriveTrainConstants", "maxTurnSpeed", AlignToTargetDavid.maxTurnSpeed);
+		Shuffleboard.putNumber("DriveTrainConstants", "maxAcceleration", AlignToTargetDavid.maxAcceleration);
+
 
 	}
 
 	@Override
 	public void robotPeriodic() {
+
 		driveTrain.updateSmartDashboard();
+		SmartDashboard.putData(Scheduler.getInstance());
 	}
 
 	@Override

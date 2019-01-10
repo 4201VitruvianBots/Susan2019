@@ -69,9 +69,10 @@ public class OI {
 		for(int i = 0; i < rightButtons.length; i++)
 			rightButtons[i] = new JoystickButton(rightJoystick, i + 1);
 
+		leftButtons[0].whenPressed(new TogglePiston());
 		leftButtons[1].whenPressed(new ToggleLimelightCameraMode());
 
-		rightButtons[0].whileHeld(new AlignToTarget());
+		rightButtons[0].whileHeld(new AlignToTargetDavid());
 	}
 	
 	public double getLeftY(){
