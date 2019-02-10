@@ -62,8 +62,8 @@ public class OI {
 	 * between drivers, controls testing, etc.
 	 */
 	public void initializeButtons() {
-		leftButtons = new Button[7];
-		rightButtons = new Button[12];
+		leftButtons = new Button[16];
+		rightButtons = new Button[16];
 		for(int i = 0; i < leftButtons.length; i++)
 			leftButtons[i] = new JoystickButton(leftJoystick, i + 1);
 		for(int i = 0; i < rightButtons.length; i++)
@@ -71,8 +71,15 @@ public class OI {
 
 		//leftButtons[1].whenPressed(new ToggleLimelightCameraMode());
 
-		rightButtons[0].whileHeld(new AlignToTarget());
-		rightButtons[1].whenPressed(new ToggleTestPiston());
+		rightButtons[0].whileHeld(new AlignToTarget());			//Uses the Limelight camera to point itself at a target
+		rightButtons[1].whenPressed(new ToggleTestPiston());	//Either opens solenoid 0 or 1, it's a toggle
+		leftButtons[4].whenPressed(new SetLEDMode(0));				//sets the LED mode to 0
+		leftButtons[5].whenPressed(new SetLEDMode(1));				//sets the LED mode to 1
+		leftButtons[6].whenPressed(new SetLEDMode(2));				//guess what?
+		leftButtons[7].whenPressed(new SetLEDMode(3));
+
+
+
 	}
 	
 	public double getLeftY(){

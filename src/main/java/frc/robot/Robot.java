@@ -20,6 +20,7 @@ public class Robot extends TimedRobot {
 	public static DriveTrain driveTrain = new DriveTrain();
 	public static Limelight limelight = new Limelight();
 	public static Pneumatics pneumatics = new Pneumatics();
+	public static LEDOutput ledOutput = new LEDOutput();
 	public static OI oi;
 
 	Command m_teleOpCommand;
@@ -39,6 +40,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotPeriodic() {
 		driveTrain.updateSmartDashboard();
+
 	}
 
 	@Override

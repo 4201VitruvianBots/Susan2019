@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -15,7 +16,7 @@ package frc.robot;
  * 
  * Team 4201 RobotMap Standards
  * We have a standard mapping scheme as a baseline to make our basic code 
- * poratable to new robots every year. This also allows us to ensure our
+ * portable to new robots every year. This also allows us to ensure our
  * basic wiring is correct. 
  * 
  * For each address value, the left/positive value should always be an even
@@ -59,4 +60,15 @@ public class RobotMap {
 	public static final int driveTrainLeftSlave = 21;
 	public static final int driveTrainRightMaster = 22;
 	public static final int driveTrainRightSlave = 23;
+
+	// Bling
+	public static final int LEDCh1 = 23;	//pins on the navX, 23 is 9, 24 is 8, 10 is 0, 11 is 1, etc.
+	public static final int LEDCh2 = 22;	//should have more general variable names, someone refactor this
+	public static final int LEDCh3 = 21;
+	public static final int LEDCh4 = 20;
+	public static final int LimSwitch = 19;		//Used for testing onboard sensors
+	public static final int SelfAddress = 16;	//used for I2C communication
+	public static final int ArduinoAddress = 8;
+
+
 }
