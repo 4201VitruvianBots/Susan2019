@@ -52,14 +52,15 @@ public class RobotMap {
 	public static final int PCMOne = 11;
 	public static final int driveTrainShifterForward = 0;
 	public static final int driveTrainShifterReverse = 1;
-	public static final int testPistonForward = 2;
-	public static final int testPistonReverse = 3;
+	public static final int testPistonForward = 0;
+	public static final int testPistonReverse = 1;
 
 	// Motor Controllers
-	public static final int driveTrainLeftMaster = 20;
-	public static final int driveTrainLeftSlave = 21;
+	public static final int driveTrainLeftMaster = 21;
+	public static final int driveTrainLeftSlave = 20;
 	public static final int driveTrainRightMaster = 22;
 	public static final int driveTrainRightSlave = 23;
+	public static final int testSparkMAX = 0;
 
 	// Bling
 	public static final int LEDCh1 = 23;	//pins on the navX, 23 is 9, 24 is 8, 10 is 0, 11 is 1, etc.
