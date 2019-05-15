@@ -17,10 +17,10 @@ public class ToggleTestPiston extends InstantCommand {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-       if(Robot.pneumatics.getTestPistonStatus())
-           Robot.pneumatics.setTestPiston(false);
-       else
-           Robot.pneumatics.setTestPiston(true);
+//       if(Robot.pneumatics.getTestPistonStatus())
+//           Robot.pneumatics.setTestPiston(false);
+//       else
+//           Robot.pneumatics.setTestPiston(true);
 
     }
 

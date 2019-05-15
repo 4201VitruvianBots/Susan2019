@@ -1,32 +1,30 @@
 
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PWMSpeedController;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
-import frc.robot.commands.SetArcadeDrive;
 import frc.robot.commands.SetTankDrive;
 import frc.vitruvianlib.driverstation.Shuffleboard;
 import frc.vitruvianlib.util.PIDOutputInterface;
+import com.revrobotics.CANSparkMax;
+
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
 public class DriveTrain extends Subsystem {
-	public WPI_TalonSRX m_leftMaster = new WPI_TalonSRX(RobotMap.driveTrainLeftMaster);
-	public WPI_TalonSRX m_leftSlave = new WPI_TalonSRX(RobotMap.driveTrainLeftSlave);
-	public WPI_TalonSRX m_rightMaster = new WPI_TalonSRX(RobotMap.driveTrainRightMaster);
-	public WPI_TalonSRX m_rightSlave = new WPI_TalonSRX(RobotMap.driveTrainRightSlave);
-	public Spark m_testNEO = new Spark(RobotMap.testSparkMAX); {
+	private TalonSRX m_leftMaster = new TalonSRX(RobotMap.driveTrainLeftMaster);
+	private TalonSRX m_rightMaster = new TalonSRX(RobotMap.driveTrainRightMaster);
+	private TalonSRX m_rightSlave = new TalonSRX(RobotMap.driveTrainRightSlave);
+	private CANSparkMax m_testNEO = new CANSparkMax(RobotMap.driveTrainLeftSlave, CANSparkMaxLowLevel.MotorType.kBrushless); {
 	}
-
-	DifferentialDrive robotDrive = new DifferentialDrive(m_leftMaster, m_rightMaster);
 
 	static double kP = 0.03;        		// Start with P = 10% of your max output, double until you get a quarter-decay oscillation
 	static double kI = 0;           // Start with I = P / 100
@@ -41,7 +39,7 @@ public class DriveTrain extends Subsystem {
 	public DriveTrain(){
 		super("Drive Train");
 
-		m_leftSlave.set(ControlMode.Follower, m_leftMaster.getDeviceID());
+		m_leftMaster.configFactoryDefault();
 		m_rightSlave.set(ControlMode.Follower, m_rightMaster.getDeviceID());
 
 		navX.reset();
@@ -52,11 +50,15 @@ public class DriveTrain extends Subsystem {
 	// Put methods for controlling the subsystem here. Call these from Commands.
 
 	public void driveTank(double left, double right) {
-		robotDrive.tankDrive(left, right);
+
+		m_leftMaster.set(ControlMode.PercentOutput,left);
+		m_testNEO.set(right);
 	}
 
-	public void driveArcade(double forward, double turn) {
-		robotDrive.arcadeDrive(forward, turn);
+	public void driveArcade(double throttle, double turn) {
+		m_leftMaster.set(ControlMode.PercentOutput,(throttle + turn));
+		m_testNEO.set(throttle - turn);
+
 	}
 
 	public double getAngle(){

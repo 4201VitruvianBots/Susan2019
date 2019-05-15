@@ -17,7 +17,7 @@ public class SetTankDrive extends Command{
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.driveTrain.driveTank(Robot.oi.getLeftY(), Robot.oi.getRightY());
+        Robot.driveTrain.driveTank(Robot.oi.getLeftX(), Robot.oi.getLeftY());
     }
 
     // Make this return true when this Command no longer needs to run execute()

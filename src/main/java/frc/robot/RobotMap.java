@@ -60,7 +60,7 @@ public class RobotMap {
 	public static final int driveTrainLeftSlave = 20;
 	public static final int driveTrainRightMaster = 22;
 	public static final int driveTrainRightSlave = 23;
-	public static final int testSparkMAX = 0;
+	public static final int testSparkMAX = 20;
 
 	// Bling
 	public static final int LEDCh1 = 23;	//pins on the navX, 23 is 9, 24 is 8, 10 is 0, 11 is 1, etc.
